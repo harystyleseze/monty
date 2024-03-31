@@ -1,5 +1,7 @@
 This is our stacks and queues project readme file
 
+This project is a collaboration of RIAK MATIOP and HARRISON EZE
+
 General
 What do LIFO and FIFO mean
 What is a stack, and when to use it
