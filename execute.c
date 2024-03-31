@@ -1,65 +1,52 @@
 #include "monty.h"
-
 /**
- * stack_op_func - function searches for a match between opcode and text
- * and returns the corresponding function
- * @line: struct containing line contents and line number
- * @meta: struct containing all allocated memory
- *
- * Return: pointer to the matching function
- */
-void (*stack_op_func(line_t line, meta_t *meta))(stack_t **, unsigned int)
+* execute - executes the opcode
+* @stack: head linked list - stack
+* @counter: line_counter
+* @file: poiner to monty file
+* @content: line content
+* Return: no return
+*/
+int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 {
+	instruction_t opst[] = {
+				{"push", push_func}, {"pall", f_pall}, {"pint", f_pint},
+				{"pop", pop_func},
+				{"swap", swap_func},
+				{"add", add_func},
+				{"nop", nop_func},
+				{"sub", sub_func},
+				{"div", div_func},
+				{"mul", mul_func},
+				{"mod", mod_func},
+				{"pchar", pchar_func},
+				{"pstr", pstr_func},
+				{"rotl", rotl_func},
+				{"rotr", rotr_func},
+				{"queue", queue_func},
+				{"stack", stack_func},
+				{NULL, NULL}
+				};
 	unsigned int i = 0;
-	struct_t ops[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", addop},
-		{"sub", subop},
-		{"div", divop},
-		{"mul", mulop},
-		{"mod", modop},
-		{"nop", nop},
-		{"pchar", pchar},
-		{"pstr", pstr},
-		{"rotl", rotlop},
-		{"rotr", rotrop},
-		{"stack", addst},
-		{"queue", addqu},
-		{NULL, NULL}
-	};
+	char *op;
 
-	if (check_comment(line))
-		return (nop);
-
-	while (ops[i].opcode)
+	op = strtok(content, " \n\t");
+	if (op && op[0] == '#')
+		return (0);
+	meta.arg = strtok(NULL, " \n\t");
+	while (opst[i].opcode && op)
 	{
-		if (strcmp(ops[i].opcode, line.content[0]) == 0)
-		{
-			check_push(line, meta, ops[i].opcode);
-			if (arg.flag == 1 &&
-			strcmp(ops[i].opcode, "push") == 0)
-			{
-				if (line.content)
-					free(line.content);
-				return (qpush);
-			}
-			free(line.content);
-			return (ops[i].f);
+		if (strcmp(op, opst[i].opcode) == 0)
+		{	opst[i].f(stack, counter);
+			return (0);
 		}
-
 		i++;
 	}
-
-	fprintf(stderr, "L%d: unknown instruction %s\n", line.number,
-	line.content[0]);
-	free(line.content);
-	free(meta->buf);
-	free_stack(&(meta->stack));
-	fclose(meta->fp);
-	free(meta);
-	exit(EXIT_FAILURE);
+	if (op && opst[i].opcode == NULL)
+	{ fprintf(stderr, "L%d: unknown instruction %s\n", counter, op);
+		fclose(file);
+		free(content);
+		free_stack(*stack);
+		exit(EXIT_FAILURE); }
+	return (1);
 }
