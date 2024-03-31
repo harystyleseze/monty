@@ -1,6 +1,5 @@
 This is our stacks and queues project readme file
 
-
 General
 What do LIFO and FIFO mean
 What is a stack, and when to use it
@@ -34,42 +33,43 @@ More Info
 Data structures
 Please use the following data structures for this project. Don’t forget to include them in your header file.
 
-/**
- * struct stack_s - doubly linked list representation of a stack (or queue)
- * @n: integer
- * @prev: points to the previous element of the stack (or queue)
- * @next: points to the next element of the stack (or queue)
- *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
- */
-typedef struct stack_s
-{
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
-} stack_t;
-/**
- * struct instruction_s - opcode and its function
- * @opcode: the opcode
- * @f: function to handle the opcode
- *
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
- */
-typedef struct instruction_s
-{
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
-} instruction_t;
-Compilation & Output
-Your code will be compiled this way:
-$ gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
-Any output must be printed on stdout
-Any error message must be printed on stderr
-Here is a link to a GitHub repository that could help you making sure your errors are printed on stderr
-Tests
-We strongly encourage you to work all together on a set of tests
+/\*\*
+
+- struct stack_s - doubly linked list representation of a stack (or queue)
+- @n: integer
+- @prev: points to the previous element of the stack (or queue)
+- @next: points to the next element of the stack (or queue)
+-
+- Description: doubly linked list node structure
+- for stack, queues, LIFO, FIFO
+  */
+  typedef struct stack_s
+  {
+  int n;
+  struct stack_s *prev;
+  struct stack_s \*next;
+  } monty_stack_t;
+  /\*\*
+- struct instruction_s - opcode and its function
+- @opcode: the opcode
+- @f: function to handle the opcode
+-
+- Description: opcode and its function
+- for stack, queues, LIFO, FIFO
+  */
+  typedef struct instruction_s
+  {
+  char *opcode;
+  void (_f)(monty_stack_t \*\*stack, unsigned int line_number);
+  } instruction_t;
+  Compilation & Output
+  Your code will be compiled this way:
+  $ gcc -Wall -Werror -Wextra -pedantic -std=c89 _.c -o monty
+  Any output must be printed on stdout
+  Any error message must be printed on stderr
+  Here is a link to a GitHub repository that could help you making sure your errors are printed on stderr
+  Tests
+  We strongly encourage you to work all together on a set of tests
 
 The Monty language
 Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it. The goal of this project is to create an interpreter for Monty ByteCodes files.
@@ -83,9 +83,9 @@ push 0$
 push 1$
 push 2$
   push 3$
-                   pall    $
+pall $
 push 4$
-    push 5    $
+push 5 $
       push    6        $
 pall$
 julien@ubuntu:~/monty$
@@ -96,7 +96,7 @@ push 0 Push 0 onto the stack$
 push 1 Push 1 onto the stack$
 $
 push 2$
-  push 3$
+push 3$
                    pall    $
 $
 $
@@ -126,8 +126,7 @@ If you can’t malloc anymore, print the error message Error: malloc failed, fol
 You have to use malloc and free and are not allowed to use any other function from man malloc (realloc, calloc, …)
 Quiz questions
 Great! You've completed the quiz successfully! Keep going! (Show quiz)
-Tasks
-0. push, pall
+Tasks 0. push, pall
 mandatory
 Implement the push and pall opcodes.
 
@@ -160,11 +159,12 @@ julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
+
 0/16 pts
+
 1. pint
-mandatory
-Implement the pint opcode.
+   mandatory
+   Implement the pint opcode.
 
 The pint opcode
 
@@ -172,24 +172,23 @@ The opcode pint prints the value at the top of the stack, followed by a new line
 
 Usage: pint
 If the stack is empty, print the error message L<line_number>: can't pint, stack empty, followed by a new line, and exit with the status EXIT_FAILURE
-julien@ubuntu:~/monty$ cat bytecodes/06.m 
+julien@ubuntu:~/monty$ cat bytecodes/06.m
 push 1
 pint
 push 2
 pint
 push 3
 pint
-julien@ubuntu:~/monty$ ./monty bytecodes/06.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/06.m
 1
 2
 3
-julien@ubuntu:~/monty$ 
+julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/5 pts
-2. pop
+
+0/5 pts 2. pop
 mandatory
 Implement the pop opcode.
 
@@ -199,7 +198,7 @@ The opcode pop removes the top element of the stack.
 
 Usage: pop
 If the stack is empty, print the error message L<line_number>: can't pop an empty stack, followed by a new line, and exit with the status EXIT_FAILURE
-julien@ubuntu:~/monty$ cat bytecodes/07.m 
+julien@ubuntu:~/monty$ cat bytecodes/07.m
 push 1
 push 2
 push 3
@@ -210,20 +209,19 @@ pop
 pall
 pop
 pall
-julien@ubuntu:~/monty$ ./monty bytecodes/07.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/07.m
 3
 2
 1
 2
 1
 1
-julien@ubuntu:~/monty$ 
+julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/5 pts
-3. swap
+
+0/5 pts 3. swap
 mandatory
 Implement the swap opcode.
 
@@ -233,27 +231,26 @@ The opcode swap swaps the top two elements of the stack.
 
 Usage: swap
 If the stack contains less than two elements, print the error message L<line_number>: can't swap, stack too short, followed by a new line, and exit with the status EXIT_FAILURE
-julien@ubuntu:~/monty$ cat bytecodes/09.m 
+julien@ubuntu:~/monty$ cat bytecodes/09.m
 push 1
 push 2
 push 3
 pall
 swap
 pall
-julien@ubuntu:~/monty$ ./monty bytecodes/09.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/09.m
 3
 2
 1
 2
 3
 1
-julien@ubuntu:~/monty$ 
+julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/6 pts
-4. add
+
+0/6 pts 4. add
 mandatory
 Implement the add opcode.
 
@@ -266,7 +263,7 @@ If the stack contains less than two elements, print the error message L<line_num
 The result is stored in the second top element of the stack, and the top element is removed, so that at the end:
 The top element of the stack contains the result
 The stack is one element shorter
-julien@ubuntu:~/monty$ cat bytecodes/12.m 
+julien@ubuntu:~/monty$ cat bytecodes/12.m
 push 1
 push 2
 push 3
@@ -274,7 +271,7 @@ pall
 add
 pall
 
-julien@ubuntu:~/monty$ ./monty bytecodes/12.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/12.m
 3
 2
 1
@@ -284,9 +281,8 @@ julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/6 pts
-5. nop
+
+0/6 pts 5. nop
 mandatory
 Implement the nop opcode.
 
@@ -298,9 +294,8 @@ Usage: nop
 Repo:
 
 GitHub repository: monty
-  
-0/5 pts
-6. sub
+
+0/5 pts 6. sub
 #advanced
 Implement the sub opcode.
 
@@ -313,14 +308,14 @@ If the stack contains less than two elements, print the error message L<line_num
 The result is stored in the second top element of the stack, and the top element is removed, so that at the end:
 The top element of the stack contains the result
 The stack is one element shorter
-julien@ubuntu:~/monty$ cat bytecodes/19.m 
+julien@ubuntu:~/monty$ cat bytecodes/19.m
 push 1
 push 2
 push 10
 push 3
 sub
 pall
-julien@ubuntu:~/monty$ ./monty bytecodes/19.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/19.m
 7
 2
 1
@@ -328,9 +323,8 @@ julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/6 pts
-7. div
+
+0/6 pts 7. div
 #advanced
 Implement the div opcode.
 
@@ -347,9 +341,8 @@ If the top element of the stack is 0, print the error message L<line_number>: di
 Repo:
 
 GitHub repository: monty
-  
-0/7 pts
-8. mul
+
+0/7 pts 8. mul
 #advanced
 Implement the mul opcode.
 
@@ -365,9 +358,8 @@ The stack is one element shorter
 Repo:
 
 GitHub repository: monty
-  
-0/6 pts
-9. mod
+
+0/6 pts 9. mod
 #advanced
 Implement the mod opcode.
 
@@ -384,18 +376,16 @@ If the top element of the stack is 0, print the error message L<line_number>: di
 Repo:
 
 GitHub repository: monty
-  
-0/7 pts
-10. comments
+
+0/7 pts 10. comments
 #advanced
 Every good language comes with the capability of commenting. When the first non-space character of a line is #, treat this line as a comment (don’t do anything).
 
 Repo:
 
 GitHub repository: monty
-  
-0/5 pts
-11. pchar
+
+0/5 pts 11. pchar
 #advanced
 Implement the pchar opcode.
 
@@ -407,18 +397,17 @@ Usage: pchar
 The integer stored at the top of the stack is treated as the ascii value of the character to be printed
 If the value is not in the ascii table (man ascii) print the error message L<line_number>: can't pchar, value out of range, followed by a new line, and exit with the status EXIT_FAILURE
 If the stack is empty, print the error message L<line_number>: can't pchar, stack empty, followed by a new line, and exit with the status EXIT_FAILURE
-julien@ubuntu:~/monty$ cat bytecodes/28.m 
+julien@ubuntu:~/monty$ cat bytecodes/28.m
 push 72
 pchar
-julien@ubuntu:~/monty$ ./monty bytecodes/28.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/28.m
 H
 julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/8 pts
-12. pstr
+
+0/8 pts 12. pstr
 #advanced
 Implement the pstr opcode.
 
@@ -433,7 +422,7 @@ the stack is over
 the value of the element is 0
 the value of the element is not in the ascii table
 If the stack is empty, print only a new line
-julien@ubuntu:~/monty$ cat bytecodes/31.m 
+julien@ubuntu:~/monty$ cat bytecodes/31.m
 push 1
 push 2
 push 3
@@ -448,15 +437,14 @@ push 104
 push 99
 push 83
 pstr
-julien@ubuntu:~/monty$ ./monty bytecodes/31.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/31.m
 School
-julien@ubuntu:~/monty$ 
+julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/12 pts
-13. rotl
+
+0/12 pts 13. rotl
 #advanced
 Implement the rotl opcode.
 
@@ -467,7 +455,7 @@ The opcode rotl rotates the stack to the top.
 Usage: rotl
 The top element of the stack becomes the last one, and the second top element of the stack becomes the first one
 rotl never fails
-julien@ubuntu:~/monty$ cat bytecodes/35.m 
+julien@ubuntu:~/monty$ cat bytecodes/35.m
 push 1
 push 2
 push 3
@@ -481,7 +469,7 @@ push 0
 pall
 rotl
 pall
-julien@ubuntu:~/monty$ ./monty bytecodes/35.m 
+julien@ubuntu:~/monty$ ./monty bytecodes/35.m
 0
 9
 8
@@ -502,13 +490,12 @@ julien@ubuntu:~/monty$ ./monty bytecodes/35.m
 2
 1
 0
-julien@ubuntu:~/monty$ 
+julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/8 pts
-14. rotr
+
+0/8 pts 14. rotr
 #advanced
 Implement the rotr opcode.
 
@@ -522,9 +509,8 @@ rotr never fails
 Repo:
 
 GitHub repository: monty
-  
-0/8 pts
-15. stack, queue
+
+0/8 pts 15. stack, queue
 #advanced
 Implement the stack and queue opcodes.
 
@@ -579,30 +565,28 @@ julien@ubuntu:~/monty$ ./monty bytecodes/47.m
 2
 3
 11111
-julien@ubuntu:~/monty$ 
+julien@ubuntu:~/monty$
 Repo:
 
 GitHub repository: monty
-  
-0/10 pts
-16. Brainf*ck
+
+0/10 pts 16. Brainf*ck
 #advanced
 Write a Brainf*ck script that prints School, followed by a new line.
 
 All your Brainf*ck files should be stored inside the bf sub directory
 You can install the bf interpreter to test your code: sudo apt-get install bf
 Read: Brainf*ck
-julien@ubuntu:~/monty/bf$ bf 1000-school.bf 
+julien@ubuntu:~/monty/bf$ bf 1000-school.bf
 School
-julien@ubuntu:~/monty/bf$ 
+julien@ubuntu:~/monty/bf$
 Repo:
 
 GitHub repository: monty
 Directory: bf
 File: 1000-school.bf
-  
-0/1 pt
-17. Add two digits
+
+0/1 pt 17. Add two digits
 #advanced
 Add two digits given by the user.
 
@@ -616,9 +600,8 @@ Repo:
 GitHub repository: monty
 Directory: bf
 File: 1001-add.bf
-  
-0/3 pts
-18. Multiplication
+
+0/3 pts 18. Multiplication
 #advanced
 Multiply two digits given by the user.
 
@@ -632,23 +615,18 @@ Repo:
 GitHub repository: monty
 Directory: bf
 File: 1002-mul.bf
-  
-0/3 pts
-19. Multiplication level up
+
+0/3 pts 19. Multiplication level up
 #advanced
 Multiply two digits given by the user.
 
-
-
-
 Read the two digits from stdin, multiply them, and print the result, followed by a new line
-julien@ubuntu:~/monty/bf$ bf 1003-mul.bf 
+julien@ubuntu:~/monty/bf$ bf 1003-mul.bf
 77
 49
-julien@ubuntu:~/monty/bf$ 
+julien@ubuntu:~/monty/bf$
 Repo:
 
 GitHub repository: monty
 Directory: bf
 File: 1003-mul.bf
-
